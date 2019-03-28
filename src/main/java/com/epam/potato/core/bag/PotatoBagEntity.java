@@ -7,11 +7,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,9 +29,9 @@ import javax.persistence.TemporalType;
 public class PotatoBagEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private long id;
+    @GeneratedValue
+    @Column(nullable = false, unique = true)
+    private UUID id;
     @Column(nullable = false, name = "number_of_potatoes")
     private int numberOfPotatoes;
     @JoinColumn(name = "supplier_id", nullable = false)
@@ -43,11 +43,11 @@ public class PotatoBagEntity {
     @Column(nullable = false)
     private double price;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

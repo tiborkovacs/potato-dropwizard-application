@@ -17,8 +17,8 @@
         </createTable>
 
         <createTable tableName="potato_bags">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
+            <column name="id" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false" unique="true" />
             </column>
             <column name="number_of_potatoes" type="int" />
             <column name="supplier_id" type="bigint">

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -19,28 +20,27 @@ import javax.validation.constraints.NotNull;
 @JsonIgnoreProperties(allowGetters = true, value = "id")
 public class PotatoBag {
 
-    @Min(0)
-    private final long id;
+    private final UUID id;
     @Min(1)
     @Max(100)
     private final int numberOfPotatoes;
     @NotNull
     private final String supplierName;
-    //@NotNull
+    @NotNull
     private final LocalDateTime packedDateTime;
     @Min(1)
     @Max(50)
     private final double price;
 
     private PotatoBag(Builder builder) {
-        id = Optional.ofNullable(builder.id).orElse(0L);
+        id = builder.id;
         numberOfPotatoes = Optional.ofNullable(builder.numberOfPotatoes).orElse(0);
         supplierName = builder.supplierName;
         packedDateTime = builder.packedDateTime;
         price = Optional.ofNullable(builder.price).orElse(0D);
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -77,13 +77,13 @@ public class PotatoBag {
 
     public static class Builder {
 
-        private Long id;
+        private UUID id;
         private Integer numberOfPotatoes;
         private String supplierName;
         private LocalDateTime packedDateTime;
         private Double price;
 
-        public Builder withId(Long id) {
+        public Builder withId(UUID id) {
             this.id = id;
 
             return this;
